@@ -16,7 +16,7 @@ namespace CQRSTests.WriteModel
         private Guid _guid;
         protected override InventoryCommandHandlers BuildHandler()
         {
-            return new InventoryCommandHandlers(Session);
+            return new InventoryCommandHandlers(Session, null);
         }
 
         protected override IEnumerable<IEvent> Given()

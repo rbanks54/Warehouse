@@ -4,6 +4,7 @@ using CQRSCode.ReadModel.Events;
 using CQRSCode.ReadModel.Infrastructure;
 using CQRSlite.Events;
 using Microsoft.ApplicationInsights;
+using System.Collections.Generic;
 
 namespace CQRSCode.ReadModel.Handlers
 {
@@ -22,13 +23,23 @@ namespace CQRSCode.ReadModel.Handlers
 
         public void Handle(InventoryItemCreated message)
         {
-            telemetry.TrackEvent("InventoryItemCreated");
+            var properties = new Dictionary<string, string>()
+            {
+                {"Name",message.Name},
+                {"Id", message.Id.ToString() },
+                {"Timestamp", message.TimeStamp.ToString() }
+            };
+            var metrics = new Dictionary<string, double>() {
+                { "Version", message.Version }
+            };
+            telemetry?.TrackEvent("Receieved InventoryItemCreated", properties, metrics);
+
             InMemoryDatabase.Details.Add(message.Id, new InventoryItemDetailsDto(message.Id, message.Name, 0, message.Version));
         }
 
         public void Handle(InventoryItemRenamed message)
         {
-            telemetry.TrackEvent("InventoryItemRenamed");
+            telemetry?.TrackEvent("Receieved InventoryItemRenamed");
             InventoryItemDetailsDto d = GetDetailsItem(message.Id);
             d.Name = message.NewName;
             d.Version = message.Version;
@@ -46,7 +57,7 @@ namespace CQRSCode.ReadModel.Handlers
 
         public void Handle(ItemsRemovedFromInventory message)
         {
-            telemetry.TrackEvent("ItemsRemovedFromInventory");
+            telemetry?.TrackEvent("Receieved ItemsRemovedFromInventory");
             var dto = GetDetailsItem(message.Id);
             dto.CurrentCount -= message.Count;
             dto.Version = message.Version;
@@ -54,7 +65,7 @@ namespace CQRSCode.ReadModel.Handlers
 
         public void Handle(ItemsCheckedInToInventory message)
         {
-            telemetry.TrackEvent("ItemsCheckedInToInventory");
+            telemetry?.TrackEvent("Receieved ItemsCheckedInToInventory");
             var dto = GetDetailsItem(message.Id);
             dto.CurrentCount += message.Count;
             dto.Version = message.Version;
@@ -62,7 +73,7 @@ namespace CQRSCode.ReadModel.Handlers
 
         public void Handle(InventoryItemDeactivated message)
         {
-            telemetry.TrackEvent("InventoryItemDeactivated");
+            telemetry?.TrackEvent("Receieved InventoryItemDeactivated");
             InMemoryDatabase.Details.Remove(message.Id);
         }
     }
