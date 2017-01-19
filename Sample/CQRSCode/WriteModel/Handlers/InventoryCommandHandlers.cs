@@ -4,6 +4,7 @@ using CQRSlite.Commands;
 using CQRSlite.Domain;
 using Microsoft.ApplicationInsights;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace CQRSCode.WriteModel.Handlers
 {
@@ -31,6 +32,7 @@ namespace CQRSCode.WriteModel.Handlers
             };
             telemetry?.TrackEvent("Received CreateInventoryItem Command", properties);
             var item = new InventoryItem(message.Id, message.Name);
+            Thread.Sleep(1500);
             _session.Add(item);
             _session.Commit();
             telemetry?.TrackEvent("Command processing completed");
@@ -47,6 +49,11 @@ namespace CQRSCode.WriteModel.Handlers
 
         public void Handle(RemoveItemsFromInventory message)
         {
+            var properties = new Dictionary<string, string>()
+            {
+                {"Item Id", message.Id.ToString()},
+                {"Item Count", message.Count.ToString() }
+            };
             telemetry?.TrackEvent("Received RemoveItemsFromInventory Command");
             var item = _session.Get<InventoryItem>(message.Id, message.ExpectedVersion);
             item.Remove(message.Count);
