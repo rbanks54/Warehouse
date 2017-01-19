@@ -5,6 +5,7 @@ using CQRSlite.Cache;
 using CQRSlite.Commands;
 using CQRSlite.Domain;
 using CQRSlite.Events;
+using Microsoft.ApplicationInsights;
 using StructureMap;
 using StructureMap.Graph;
 using StructureMap.Web;
@@ -18,6 +19,7 @@ namespace CQRSWeb
             var container = new Container(x =>
             {
                 x.For<InProcessBus>().Singleton().Use<InProcessBus>();
+                x.For<TelemetryClient>().Use(y => new TelemetryClient());
                 x.For<ICommandSender>().Use(y => y.GetInstance<InProcessBus>());
                 x.For<IEventPublisher>().Use(y => y.GetInstance<InProcessBus>());
                 x.For<IHandlerRegistrar>().Use(y => y.GetInstance<InProcessBus>());
