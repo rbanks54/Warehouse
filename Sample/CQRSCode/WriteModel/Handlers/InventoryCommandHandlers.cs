@@ -3,6 +3,8 @@ using CQRSCode.WriteModel.Domain;
 using CQRSlite.Commands;
 using CQRSlite.Domain;
 using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.DataContracts;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -43,6 +45,11 @@ namespace CQRSCode.WriteModel.Handlers
             telemetry?.TrackEvent("Received DeactivateInventoryItem Command");
             var item = _session.Get<InventoryItem>(message.Id, message.ExpectedVersion);
             item.Deactivate();
+
+            telemetry.TrackTrace("Item deactivated. About to commit",
+               SeverityLevel.Information,
+               new Dictionary<string, string> { { "item Id", item.Id.ToString() } });
+
             _session.Commit();
             telemetry?.TrackEvent("Command processing completed");
         }
@@ -54,7 +61,7 @@ namespace CQRSCode.WriteModel.Handlers
                 {"Item Id", message.Id.ToString()},
                 {"Item Count", message.Count.ToString() }
             };
-            telemetry?.TrackEvent("Received RemoveItemsFromInventory Command");
+            telemetry?.TrackEvent("Received RemoveItemsFromInventory Command", properties);
             var item = _session.Get<InventoryItem>(message.Id, message.ExpectedVersion);
             item.Remove(message.Count);
             _session.Commit();
@@ -64,9 +71,23 @@ namespace CQRSCode.WriteModel.Handlers
         public void Handle(CheckInItemsToInventory message)
         {
             telemetry?.TrackEvent("Received CheckInItemsToInventory Command");
-            var item = _session.Get<InventoryItem>(message.Id, message.ExpectedVersion);
-            item.CheckIn(message.Count);
-            _session.Commit();
+
+            var success = false;
+            var startTime = DateTime.UtcNow;
+            var timer = System.Diagnostics.Stopwatch.StartNew();
+            try
+            {
+                var item = _session.Get<InventoryItem>(message.Id, message.ExpectedVersion);
+                item.CheckIn(message.Count);
+                _session.Commit();
+                success = true;
+            }
+            finally
+            {
+                timer.Stop();
+                telemetry.TrackDependency("persistence", "CheckIn", startTime, timer.Elapsed, success);
+            }
+
             telemetry?.TrackEvent("Command processing completed");
         }
 
