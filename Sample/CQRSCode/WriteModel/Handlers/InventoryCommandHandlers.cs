@@ -85,7 +85,7 @@ namespace CQRSCode.WriteModel.Handlers
             finally
             {
                 timer.Stop();
-                telemetry.TrackDependency("persistence", "CheckIn", startTime, timer.Elapsed, success);
+                telemetry?.TrackDependency("persistence", "CheckIn", startTime, timer.Elapsed, success);
             }
 
             telemetry?.TrackEvent("Command processing completed");
