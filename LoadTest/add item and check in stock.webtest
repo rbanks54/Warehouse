@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebTest Name="add item and check in stock" Id="83c41ac8-3bd8-489f-832d-acd1a007b661" Owner="" Priority="0" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="0" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="" ResultsLocale="">
+  <Items>
+    <Request Method="POST" Guid="97584e2c-8b50-47c8-b2c6-5be3275f72e5" Version="1.1" Url="http://warehousedemo.azurewebsites.net/Home/Add" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="http://warehousedemo.azurewebsites.net/Home/Add" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Origin" Value="http://warehousedemo.azurewebsites.net" />
+        <Header Name="Accept-Encoding" Value="gzip, deflate" />
+        <Header Name="Accept-Language" Value="en-AU,en-GB;q=0.8,en-US;q=0.6,en;q=0.4" />
+        <Header Name="Upgrade-Insecure-Requests" Value="1" />
+        <Header Name="User-Agent" Value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" />
+        <Header Name="Content-Type" Value="application/x-www-form-urlencoded" />
+        <Header Name="Accept" Value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+        <Header Name="Cache-Control" Value="max-age=0" />
+        <Header Name="Referer" Value="http://warehousedemo.azurewebsites.net/Home/Add" />
+        <Header Name="DNT" Value="1" />
+      </Headers>
+      <FormPostHttpBody>
+        <FormPostParameter Name="Name" Value="{{RandomNumber}}" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="submit" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+      </FormPostHttpBody>
+    </Request>
+    <Request Method="GET" Guid="67f2ff96-d18a-4cac-b654-8bb082de4da4" Version="1.1" Url="http://warehousedemo.azurewebsites.net/" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="http://warehousedemo.azurewebsites.net/" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="DNT" Value="1" />
+        <Header Name="Accept-Encoding" Value="gzip, deflate, sdch" />
+        <Header Name="Accept-Language" Value="en-AU,en-GB;q=0.8,en-US;q=0.6,en;q=0.4" />
+        <Header Name="Upgrade-Insecure-Requests" Value="1" />
+        <Header Name="User-Agent" Value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" />
+        <Header Name="Accept" Value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+        <Header Name="Cache-Control" Value="max-age=0" />
+      </Headers>
+      <ExtractionRules>
+        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractRegularExpression, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="ItemGuid" DisplayName="Extract Regular Expression" Description="Extract text from the response matching a regular expression and place it into the test context.">
+          <RuleParameters>
+            <RuleParameter Name="RegularExpression" Value="&lt;a\shref=&quot;\/Home\/Details\/([^&quot;]*)&quot;&gt;Name:\s{{RandomNumber}}" />
+            <RuleParameter Name="IgnoreCase" Value="False" />
+            <RuleParameter Name="Required" Value="True" />
+            <RuleParameter Name="Index" Value="0" />
+            <RuleParameter Name="HtmlDecode" Value="True" />
+            <RuleParameter Name="UseGroups" Value="True" />
+          </RuleParameters>
+        </ExtractionRule>
+      </ExtractionRules>
+    </Request>
+    <Request Method="GET" Guid="96ea6dc5-76a9-467f-84c9-547a5e56c40d" Version="1.1" Url="http://warehousedemo.azurewebsites.net/Home/Details/{{ItemGuid}}" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="http://warehousedemo.azurewebsites.net/Home/Details/b41e2f2e-19d6-4384-84d1-04c5d6829e83" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="DNT" Value="1" />
+        <Header Name="Accept-Encoding" Value="gzip, deflate, sdch" />
+        <Header Name="Accept-Language" Value="en-AU,en-GB;q=0.8,en-US;q=0.6,en;q=0.4" />
+        <Header Name="Upgrade-Insecure-Requests" Value="1" />
+        <Header Name="User-Agent" Value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" />
+        <Header Name="Accept" Value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+        <Header Name="Referer" Value="http://warehousedemo.azurewebsites.net/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="fa689584-5b4e-4381-9ac7-670748b6c86a" Version="1.1" Url="http://warehousedemo.azurewebsites.net/Home/CheckIn/{{ItemGuid}}" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="http://warehousedemo.azurewebsites.net/Home/CheckIn/b41e2f2e-19d6-4384-84d1-04c5d6829e83" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="DNT" Value="1" />
+        <Header Name="Accept-Encoding" Value="gzip, deflate, sdch" />
+        <Header Name="Accept-Language" Value="en-AU,en-GB;q=0.8,en-US;q=0.6,en;q=0.4" />
+        <Header Name="Upgrade-Insecure-Requests" Value="1" />
+        <Header Name="User-Agent" Value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" />
+        <Header Name="Accept" Value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+        <Header Name="Referer" Value="http://warehousedemo.azurewebsites.net/Home/Details/{{ItemGuid}}" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="2302b37b-3fca-480f-b57a-71e4277abe0e" Version="1.1" Url="http://warehousedemo.azurewebsites.net/" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="http://warehousedemo.azurewebsites.net/" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="DNT" Value="1" />
+        <Header Name="Accept-Encoding" Value="gzip, deflate, sdch" />
+        <Header Name="Accept-Language" Value="en-AU,en-GB;q=0.8,en-US;q=0.6,en;q=0.4" />
+        <Header Name="Upgrade-Insecure-Requests" Value="1" />
+        <Header Name="User-Agent" Value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" />
+        <Header Name="Accept" Value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+        <Header Name="Referer" Value="http://warehousedemo.azurewebsites.net/Home/CheckIn/{{ItemGuid}}" />
+        <Header Name="Cache-Control" Value="max-age=0" />
+      </Headers>
+    </Request>
+    <Request Method="POST" Guid="d9671d75-e8b2-4e47-8166-64aeea24f479" Version="1.1" Url="http://warehousedemo.azurewebsites.net/Home/CheckIn/{{ItemGuid}}" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="http://warehousedemo.azurewebsites.net/Home/CheckIn/b41e2f2e-19d6-4384-84d1-04c5d6829e83" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Origin" Value="http://warehousedemo.azurewebsites.net" />
+        <Header Name="Accept-Encoding" Value="gzip, deflate" />
+        <Header Name="Accept-Language" Value="en-AU,en-GB;q=0.8,en-US;q=0.6,en;q=0.4" />
+        <Header Name="Upgrade-Insecure-Requests" Value="1" />
+        <Header Name="User-Agent" Value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" />
+        <Header Name="Content-Type" Value="application/x-www-form-urlencoded" />
+        <Header Name="Accept" Value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+        <Header Name="Cache-Control" Value="max-age=0" />
+        <Header Name="Referer" Value="http://warehousedemo.azurewebsites.net/Home/CheckIn/{{ItemGuid}}" />
+        <Header Name="DNT" Value="1" />
+      </Headers>
+      <FormPostHttpBody>
+        <FormPostParameter Name="Id" Value="{{ItemGuid}}" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Version" Value="1" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Number" Value="12" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="submit" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+      </FormPostHttpBody>
+    </Request>
+    <Request Method="GET" Guid="3b0f349d-e885-42db-aba8-cfaa37a88461" Version="1.1" Url="http://warehousedemo.azurewebsites.net/Home/Details/{{ItemGuid}}" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="http://warehousedemo.azurewebsites.net/Home/Details/b41e2f2e-19d6-4384-84d1-04c5d6829e83" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="DNT" Value="1" />
+        <Header Name="Accept-Encoding" Value="gzip, deflate, sdch" />
+        <Header Name="Accept-Language" Value="en-AU,en-GB;q=0.8,en-US;q=0.6,en;q=0.4" />
+        <Header Name="Upgrade-Insecure-Requests" Value="1" />
+        <Header Name="User-Agent" Value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" />
+        <Header Name="Accept" Value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+        <Header Name="Referer" Value="http://warehousedemo.azurewebsites.net/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="355b8b9b-7599-4324-a2f1-12c2eeeb8bdd" Version="1.1" Url="http://warehousedemo.azurewebsites.net/Home/Remove/{{ItemGuid}}" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="http://warehousedemo.azurewebsites.net/Home/Remove/b41e2f2e-19d6-4384-84d1-04c5d6829e83" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="DNT" Value="1" />
+        <Header Name="Accept-Encoding" Value="gzip, deflate, sdch" />
+        <Header Name="Accept-Language" Value="en-AU,en-GB;q=0.8,en-US;q=0.6,en;q=0.4" />
+        <Header Name="Upgrade-Insecure-Requests" Value="1" />
+        <Header Name="User-Agent" Value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" />
+        <Header Name="Accept" Value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+        <Header Name="Referer" Value="http://warehousedemo.azurewebsites.net/Home/Details/{{ItemGuid}}" />
+      </Headers>
+      <QueryStringParameters>
+        <QueryStringParameter Name="Version" Value="2" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
+      </QueryStringParameters>
+    </Request>
+    <Request Method="GET" Guid="d1253549-b4bb-4d47-b532-69a35430e8a8" Version="1.1" Url="http://warehousedemo.azurewebsites.net/" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="http://warehousedemo.azurewebsites.net/" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="DNT" Value="1" />
+        <Header Name="Accept-Encoding" Value="gzip, deflate, sdch" />
+        <Header Name="Accept-Language" Value="en-AU,en-GB;q=0.8,en-US;q=0.6,en;q=0.4" />
+        <Header Name="Upgrade-Insecure-Requests" Value="1" />
+        <Header Name="User-Agent" Value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" />
+        <Header Name="Accept" Value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+        <Header Name="Referer" Value="http://warehousedemo.azurewebsites.net/Home/Remove/{{ItemGuid}}?Version=2" />
+        <Header Name="Cache-Control" Value="max-age=0" />
+      </Headers>
+    </Request>
+    <Request Method="POST" Guid="a5f2f3c4-e575-4473-9a72-34396a0df46d" Version="1.1" Url="http://warehousedemo.azurewebsites.net/Home/Remove/{{ItemGuid}}" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="http://warehousedemo.azurewebsites.net/Home/Remove/b41e2f2e-19d6-4384-84d1-04c5d6829e83" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Origin" Value="http://warehousedemo.azurewebsites.net" />
+        <Header Name="Accept-Encoding" Value="gzip, deflate" />
+        <Header Name="Accept-Language" Value="en-AU,en-GB;q=0.8,en-US;q=0.6,en;q=0.4" />
+        <Header Name="Upgrade-Insecure-Requests" Value="1" />
+        <Header Name="User-Agent" Value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" />
+        <Header Name="Content-Type" Value="application/x-www-form-urlencoded" />
+        <Header Name="Accept" Value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+        <Header Name="Cache-Control" Value="max-age=0" />
+        <Header Name="Referer" Value="http://warehousedemo.azurewebsites.net/Home/Remove/{{ItemGuid}}?Version=2" />
+        <Header Name="DNT" Value="1" />
+      </Headers>
+      <QueryStringParameters>
+        <QueryStringParameter Name="Version" Value="2" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
+      </QueryStringParameters>
+      <FormPostHttpBody>
+        <FormPostParameter Name="Id" Value="{{ItemGuid}}" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Version" Value="2" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Number" Value="11" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="submit" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+      </FormPostHttpBody>
+    </Request>
+    <Request Method="GET" Guid="aa6e7203-2ecd-4ffe-a2f6-e59d655bc926" Version="1.1" Url="http://warehousedemo.azurewebsites.net/Home/Details/{{ItemGuid}}" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="http://warehousedemo.azurewebsites.net/Home/Details/b41e2f2e-19d6-4384-84d1-04c5d6829e83" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="DNT" Value="1" />
+        <Header Name="Accept-Encoding" Value="gzip, deflate, sdch" />
+        <Header Name="Accept-Language" Value="en-AU,en-GB;q=0.8,en-US;q=0.6,en;q=0.4" />
+        <Header Name="Upgrade-Insecure-Requests" Value="1" />
+        <Header Name="User-Agent" Value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" />
+        <Header Name="Accept" Value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+        <Header Name="Referer" Value="http://warehousedemo.azurewebsites.net/" />
+      </Headers>
+    </Request>
+  </Items>
+  <ContextParameters>
+    <ContextParameter Name="RandomNumber" Value="" />
+    <ContextParameter Name="ItemGuid" Value="" />
+  </ContextParameters>
+  <WebTestPlugins>
+    <WebTestPlugin Classname="Microsoft.SystemCenter.Cloud.GsmPlugins.RandomIntGeneratorWebTestPlugin, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DisplayName="Generate Random Integer" Description="Generates a random integer.">
+      <RuleParameters>
+        <RuleParameter Name="ContextParameterName" Value="RandomNumber" />
+        <RuleParameter Name="MaxValue" Value="10000" />
+        <RuleParameter Name="MinValue" Value="0" />
+      </RuleParameters>
+    </WebTestPlugin>
+  </WebTestPlugins>
+</WebTest>

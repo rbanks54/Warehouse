@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 14.00
-# Visual Studio 2015
-VisualStudioVersion = 14.0.22823.1
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 14.0.22823.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{B8A193A0-0649-4A91-AD4C-DD87794D5836}"
 EndProject
@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{211744
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadTestProject", "LoadTest\LoadTestProject.csproj", "{AAB725CC-618F-4B13-BDAC-EA60ED18DE3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +58,10 @@ Global
 		{7D917143-64CF-4492-A2F6-B1D5B95136F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D917143-64CF-4492-A2F6-B1D5B95136F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D917143-64CF-4492-A2F6-B1D5B95136F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAB725CC-618F-4B13-BDAC-EA60ED18DE3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB725CC-618F-4B13-BDAC-EA60ED18DE3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAB725CC-618F-4B13-BDAC-EA60ED18DE3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAB725CC-618F-4B13-BDAC-EA60ED18DE3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
