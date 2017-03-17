@@ -14,6 +14,27 @@
         <Header Name="Referer" Value="http://warehousedemo.azurewebsites.net/Home/Add" />
         <Header Name="DNT" Value="1" />
       </Headers>
+      <RequestPlugins>
+        <RequestPlugin Classname="Microsoft.VisualStudio.WebTesting.PowerTools.SharePoint.MTSL.General.SPLTPT_MTSL_SetContextParameterValue, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DisplayName="Set Context Parameter Value" Description="Allows you to set a context parameter value for this request.">
+          <RuleParameters>
+            <RuleParameter Name="Enabled" Value="True" />
+            <RuleParameter Name="sContextParameterName" Value="RandomNumber" />
+            <RuleParameter Name="sContextParameterValue" Value="{{ItemNumber}}{{$WebTestIteration}}{{$WebTestUserId}}" />
+            <RuleParameter Name="bDoReplace" Value="False" />
+            <RuleParameter Name="sReplaceFindPattern" Value="" />
+            <RuleParameter Name="sReplaceWith" Value="" />
+            <RuleParameter Name="bUseRegEx" Value="False" />
+            <RuleParameter Name="bApplyBeforeRequest" Value="True" />
+            <RuleParameter Name="bHTMLEncode" Value="False" />
+            <RuleParameter Name="bHTMLDecode" Value="False" />
+            <RuleParameter Name="bURLEncode" Value="False" />
+            <RuleParameter Name="bURLDecode" Value="False" />
+            <RuleParameter Name="bBase64Encode" Value="False" />
+            <RuleParameter Name="bBase64Decode" Value="False" />
+            <RuleParameter Name="bRemoveUnicodeEscapeSequences" Value="False" />
+          </RuleParameters>
+        </RequestPlugin>
+      </RequestPlugins>
       <FormPostHttpBody>
         <FormPostParameter Name="Name" Value="{{RandomNumber}}" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
         <FormPostParameter Name="submit" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
@@ -171,11 +192,12 @@
   <ContextParameters>
     <ContextParameter Name="RandomNumber" Value="" />
     <ContextParameter Name="ItemGuid" Value="" />
+    <ContextParameter Name="ItemNumber" Value="" />
   </ContextParameters>
   <WebTestPlugins>
     <WebTestPlugin Classname="Microsoft.SystemCenter.Cloud.GsmPlugins.RandomIntGeneratorWebTestPlugin, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DisplayName="Generate Random Integer" Description="Generates a random integer.">
       <RuleParameters>
-        <RuleParameter Name="ContextParameterName" Value="RandomNumber" />
+        <RuleParameter Name="ContextParameterName" Value="ItemNumber" />
         <RuleParameter Name="MaxValue" Value="10000" />
         <RuleParameter Name="MinValue" Value="0" />
       </RuleParameters>
