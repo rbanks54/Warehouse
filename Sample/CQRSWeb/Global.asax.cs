@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using CQRSCode.WriteModel.Handlers;
 using CQRSlite.Config;
+using Microsoft.ApplicationInsights.Extensibility;
 
 namespace CQRSWeb
 {	
@@ -31,6 +32,8 @@ namespace CQRSWeb
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
             RegisterHandlers((IServiceLocator)DependencyResolver.Current);
+            TelemetryConfiguration.Active.TelemetryInitializers
+                    .Add(new WarehouseTelemetryInitializer());
         }
 
         private void RegisterHandlers(IServiceLocator serviceLocator)

@@ -6,6 +6,7 @@ using CQRSlite.Commands;
 using CQRSlite.Domain;
 using CQRSlite.Events;
 using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.DataContracts;
 using StructureMap;
 using StructureMap.Graph;
 using StructureMap.Web;

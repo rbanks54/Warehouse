@@ -147,6 +147,7 @@
     <Compile Include="IoC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SmDependencyResolver.cs" />
+    <Compile Include="WarehouseTelemetryInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
