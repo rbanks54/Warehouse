@@ -11,7 +11,7 @@ namespace CQRSWeb
     {
         public void Initialize(ITelemetry telemetry)
         {
-            telemetry.Context.Properties["Application Version"] = "Fred";
+            telemetry.Context.Properties["AppVersion"] = "1.0.1-beta";
         }
     }
 }
